@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nicegui"
-version = "2.11.0-dev"
+version = "2.11.1-dev"
 description = "Create web-based user interfaces with Python. The nice way."
 authors = ["Zauberzeug GmbH <info@zauberzeug.com>"]
 license = "MIT"
@@ -172,5 +172,4 @@ disable = [
     "W0102", # Dangerous default value as argument
     "W0718", # Catching too general exception
     "W1203", # Use % formatting in logging functions
-    "W1514" # Using open without explicitly specifying an encoding
 ]

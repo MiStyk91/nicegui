@@ -23,6 +23,7 @@ from .javascript_request import JavaScriptRequest
 from .logging import log
 from .observables import ObservableDict
 from .outbox import Outbox
+from .translations import translations
 from .version import __version__
 
 if TYPE_CHECKING:
@@ -157,6 +158,7 @@ class Client:
                 'favicon_url': get_favicon_url(self.page, prefix),
                 'dark': str(self.page.resolve_dark()),
                 'language': self.page.resolve_language(),
+                'translations': translations[self.page.resolve_language()],
                 'prefix': prefix,
                 'tailwind': core.app.config.tailwind,
                 'prod_js': core.app.config.prod_js,
@@ -257,6 +259,8 @@ class Client:
         In contrast to connect handlers, disconnect handlers are not called during a reconnect.
         This behavior should be fixed in version 3.0.
         """
+        if socket_id not in self._socket_to_document_id:
+            return
         document_id = self._socket_to_document_id.pop(socket_id)
         self._cancel_delete_task(document_id)
         self._num_connections[document_id] -= 1
